@@ -19,6 +19,7 @@ app.use(function(req,res,next){
 	res.locals.showTests = app.get('env') !== 'production' && req.query.test === "1";
 	next();
 });
+app.use(require('body-parser')());
 
 app.get('/',function(req,res){
 	// res.type("text/plain");
@@ -42,7 +43,15 @@ app.get('/headers', function(req,res){
 	for(var name in req.headers) s += name + ':' +req.headers[name] + '\n'
 		res.send(s);
 });
-
+app.get('/newsletter',function(req,res){
+	res.render("newsletter",{csrf : "csrf token"});
+});
+app.post('/process',function(req,res){
+		console.log(req.query.form);
+		console.log(req.body.csrf);
+		console.log(req.body.username);
+		res.redirect(303,'/thank-you')
+})
 
 //404 catch-call
 app.use(function(req,res,next){

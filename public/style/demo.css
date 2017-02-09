@@ -1,0 +1,28 @@
+/*css :768947378qq*/
+// @import url("tinyScreen.css") screen and (max-device-width: 400px);
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre, 
+form,fieldset,input,textarea,p,blockquote,th,td { 
+    padding: 0; 
+    margin: 0; 
+}
+body {font: normal 100% Helvetica, Arial, sans-serif;}//字体大小是页面默认大小的100%，即16像素。
+h1{font-size: 1.5em}
+small{font-size: 0.875em}
+li{list-style: none;}
+img {border: none;max-width: 100%;-ms-interpolation-mode: bicubic;}//window缩放失真
+
+a:hover { color:#F50;text-decoration:none;}
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  *zoom: 1;
+}/*group为清除浮动样式浮动元素直接加类样式*/
+header{
+	background-color: #000;height: 30px;
+}

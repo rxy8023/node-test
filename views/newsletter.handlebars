@@ -1,0 +1,162 @@
+ <script type="text/javascript" src="js/jquery.validate.min.js" ></script>  
+ <style type="text/css">  
+            body{background: url(img/4.jpg) no-repeat;background-size: cover<span style="font-family: 微软雅黑; background-color: rgb(239, 239, 239);">cover</span>;font-size: 16px;}  
+            .form{background: rgba(255,255,255,0.4);width:400px;margin:100px auto;}  
+            #login_form{display: block;}  
+            #register_form{display: none;}  
+            .fa{display: inline-block;top: 27px;left: 6px;position: relative;color: #ccc;}  
+            input[type="text"],input[type="password"]{padding-left:26px;}  
+            .checkbox{padding-left:21px;}  
+</style>  
+<div class="container">  
+        <div class="form row">  
+            <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form">  
+                <h3 class="form-title">Login to your account</h3>  
+                <div class="col-sm-9 col-md-9">  
+                    <div class="form-group">  
+                        <i class="fa fa-user fa-lg"></i>  
+                        <input class="form-control required" type="text" placeholder="Username" name="username" autofocus="autofocus" maxlength="20"/>  
+                    </div>  
+                    
+                    <div class="form-group">  
+                            <i class="fa fa-lock fa-lg"></i>  
+                            <input class="form-control required" type="password" placeholder="Password" name="password" maxlength="8"/>  
+                    </div>  
+                    <div class="form-group">  
+                        <label class="checkbox">  
+                            <input type="checkbox" name="remember" value="1"/> Remember me  
+                        </label>  
+                        <hr />  
+                        <a href="javascript:;" id="register_btn" class="">Create an account</a>  
+                    </div>  
+                    <div class="form-group">  
+                        <input type="button" class="btn btn-success pull-right" value="Login "/>     
+                    </div>  
+                </div>  
+            </form>  
+        </div>  
+  
+        <div class="form row">  
+            <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form" action="/process?form=newsletter" enctype="application/x-www-form-urlencoded" method="post">  
+                <h3 class="form-title">Create an account</h3>  
+                <div class="col-sm-9 col-md-9">  
+                    <div class="form-group">  
+                        <i class="fa fa-user fa-lg"></i>  
+                        <input class="form-control required" id="username" type="text" placeholder="Username" name="username" autofocus="autofocus" value="" />  
+                    </div>
+                    <span id="text"></span>  
+                    <div class="form-group">  
+                            <i class="fa fa-lock fa-lg"></i>  
+                            <input class="form-control required" type="password" placeholder="Password" id="register_password" name="password" value="" />  
+                    </div>  
+                    <div class="form-group">  
+                            <i class="fa fa-check fa-lg"></i>  
+                            <input class="form-control required" type="password" placeholder="Re-type Your Password" name="rpassword" value="" />  
+                    </div>  
+                    <div class="form-group">  
+                            <i class="fa fa-envelope fa-lg"></i>  
+                            <input class="form-control eamil" id="email" type="text" placeholder="Email" name="email" value="" />  
+                    </div>  
+                    <div class="form-group">  
+                        <input type="submit" id="signUP" class="btn btn-success pull-right" value="Sign Up "/>  
+                        <input type="button" class="btn btn-info pull-left" id="back_btn" value="Back"/>  
+                    </div>  
+                </div>  
+            </form>
+             
+        </div>  
+        </div>
+         <script type="text/javascript">
+        $(function() {  
+    $("#register_btn").click(function() {  
+        $("#register_form").css("display", "block");  
+        $("#login_form").css("display", "none");  
+    });  
+    $("#back_btn").click(function() {  
+        $("#register_form").css("display", "none");  
+        $("#login_form").css("display", "block");  
+    });  
+}); 
+$(function() {  
+    $("#login_form").validate({
+        submitHandler:function(form) {
+            alert("验证通过");
+            $(form).ajaxSubmit(
+            $.post("regist.php" ,{
+            username:$("#username").val(),
+            password:$("#register_password").val(),
+            email:$("#email").val()
+        },function(){
+            alert("上传成功")
+        })
+                 )
+            },    
+        rules: {  
+            username: "required",  
+            password: {  
+                required: true,  
+                minlength: 5  
+            },  
+        },  
+        messages: {  
+            username: "请输入姓名",  
+            password: {  
+                required: "请输入密码",  
+                minlength: "密码不能小于{0}个字 符"  
+            },  
+        }  
+    });  
+    $("#register_form").validate({  
+        rules: {  
+            username: "required",  
+            password: {  
+                required: true,  
+                minlength: 5  
+            },  
+            rpassword: {  
+                equalTo: "#register_password"  
+            },  
+            email: {  
+                required: true,  
+                email: true  
+            }  
+        },  
+        messages: {  
+            username: "请输入姓名",  
+            password: {  
+                required: "请输入密码",  
+                minlength: "密码不能小于{0}个字 符"
+            },  
+            rpassword: {  
+                equalTo: "两次密码不一样"  
+            },  
+            email: {  
+                required: "请输入邮箱",  
+                email: "请输入有效邮箱"  
+            }  
+        }  
+    })
+    $("#signUP").on('submit', function(evt){
+        evt.preventDefault();
+    })
+    // function ajaxSubmitForm(){
+    //     alert("1")
+    //     return false;
+    //         $.ajax({
+    //             type : "POST",
+    //             url : "submit.php",
+    //             dataType : "json",
+    //             beforeSend: function(XMLHttpRequest){
+    //             //do something before submit...
+    //         },
+    //         success: function(data, textStatus){
+    //             //do something after submited...
+    //         },
+    //         complete: function(XMLHttpRequest, textStatus){
+    //             do something in the end...
+    //         }
+
+    //         })
+    // } 
+});   
+    </script>

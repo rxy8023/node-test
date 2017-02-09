@@ -1,16 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="/style/demo.css">
+	<link href="http://apps.bdimg.com/libs/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
 	<title>handlebar</title>
 	{{#if showTests}}
 		<link rel="stylesheet" type="text/css" href="/vendor/mocha.css">
 	{{/if}}
-     <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>  
+     <script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+
 </head>
 <body>
-<header style="background-color: #000">
-	<img wudth="117" height="30" src="/img/1.svg">
+<header>
+	<img width="117" height="30" src="/img/1.svg">
 	<a href="/contract">contract</a>
 </header>
 	{{{body}}}
