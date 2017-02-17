@@ -47,10 +47,11 @@ app.get('/newsletter',function(req,res){
 	res.render("newsletter",{csrf : "csrf token"});
 });
 app.post('/process',function(req,res){
-		console.log(req.query.form);
-		console.log(req.body.csrf);
-		console.log(req.body.username);
-		res.redirect(303,'/thank-you')
+		// console.log(req.query.form);
+		// console.log(req.body._csrf);
+		// console.log(req.body.username);
+		// res.redirect(303,'/thank-you')
+		if (req.xhr || req.accepts('json,html') === 'json') {}
 })
 
 //404 catch-call

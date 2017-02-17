@@ -39,7 +39,8 @@
         <div class="form row">  
             <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form" action="/process?form=newsletter" enctype="application/x-www-form-urlencoded" method="post">  
                 <h3 class="form-title">Create an account</h3>  
-                <div class="col-sm-9 col-md-9">  
+                <div class="col-sm-9 col-md-9"> 
+                <input type="hidden" name="_csrf" value="{{csrf}}"> 
                     <div class="form-group">  
                         <i class="fa fa-user fa-lg"></i>  
                         <input class="form-control required" id="username" type="text" placeholder="Username" name="username" autofocus="autofocus" value="" />  
@@ -137,8 +138,17 @@ $(function() {
         }  
     })
     $("#signUP").on('submit', function(evt){
+        var action = $(this).attr('action');
+        var $container = $('.continer');
         evt.preventDefault();
-    })
+        $.ajax({
+            url : action,
+            type : post,
+            success:function(data){
+                $container.html('<h1>thank-you<h1>')
+            }
+        })
+    });
     // function ajaxSubmitForm(){
     //     alert("1")
     //     return false;
